@@ -8,10 +8,45 @@
 
 <body bgcolor="DDFFFF">
 <div>
-<h1>haloo</h1>
-<li>{{title}}</li>
-
+<h2>ニュースサイトTOPニュース一覧（atom/rssベース）</h2>
 </div>
 
-</body>
+  <div>
+   <h3><a href= "https://news.yahoo.co.jp/" target="_blank" >Yahoo主要ニュース</a></h3>
+   <ul>
+    {% for title in titles %}
+        <li>{{ title }}</li>
+    {% endfor %}
+   </ul>
+
+   <h3><a href= "https://www3.nhk.or.jp/news/?utm_int=all_header_menu_news" target="_blank" >NHK主要ニュース</a></h3>
+   <ul>
+    {% for nt in nhk %}
+        <li>{{ nt }}</li>
+    {% endfor %}
+   </ul>
+
+   <h3><a href= "https://www.msn.com/ja-jp/news" target="_blank" >MSN主要ニュース（一部不一致）</a></h3>
+   <ul>
+    {% for ms in msn[0:9] %}
+        <li>{{ ms }}</li>
+    {% endfor %}
+   </ul>
+
+   <h3><a href= "http://topics.smt.docomo.ne.jp/" target="_blank" >goo主要ニュース</a></h3>
+   <ul>
+    {% for go in goo %}
+        <li>{{ go }}</li>
+    {% endfor %}
+   </ul>
+
+   <h3><a href= "https://news.livedoor.com/" target="_blank" >ライブドア主要ニュース（表示順でなく更新順の模様）</a></h3>
+   <ul>
+    {% for dr in door[0:6] %}
+        <li>{{ dr }}</li>
+    {% endfor %}
+   </ul>
+  </div>
+
+ </body>
 </html>
