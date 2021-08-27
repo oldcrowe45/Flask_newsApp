@@ -9,36 +9,22 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def index():
-    titles=[]
-    yahoop_URL = 'https://news.yahoo.co.jp/rss/topics/top-picks.xml'
-    p = feedparser.parse(yahoop_URL)
-    for entry in p.entries:
-        titles.append(entry.title)
 
+    p = feedparser.parse('https://news.yahoo.co.jp/rss/topics/top-picks.xml')
+    titles = [entry.title for entry in p.entries]
+    
+    n = feedparser.parse('https://www.nhk.or.jp/rss/news/cat0.xml')
+    nhk = [entry.title for entry in n.entries]
+    
+    m = feedparser.parse( 'https://rss.msn.com/ja-jp/')
+    msn = [entry.title for entry in m.entries]
 
-    nhk=[]
-    NHK_URL = 'https://www.nhk.or.jp/rss/news/cat0.xml'
-    N = feedparser.parse(NHK_URL)
-    for entry in N.entries:
-        nhk.append(entry.title)
+    g = feedparser.parse('http://news.goo.ne.jp/rss/topstories/gootop/index.rdf')
+    goo = [entry.title for entry in g.entries]
 
-    msn=[]
-    msn_URL = 'https://rss.msn.com/ja-jp/'
-    M = feedparser.parse(msn_URL)
-    for entry in M.entries:
-        msn.append(entry.title)
+    l = feedparser.parse('https://news.livedoor.com/topics/rss/top.xml')
+    door = [entry.title for entry in l.entries]
 
-    goo=[]
-    goo_URL = 'http://news.goo.ne.jp/rss/topstories/gootop/index.rdf'
-    G = feedparser.parse(goo_URL)
-    for entry in G.entries:
-        goo.append(entry.title)
-
-    door=[]
-    door_URL = 'https://news.livedoor.com/topics/rss/top.xml'
-    L = feedparser.parse(door_URL)
-    for entry in L.entries:
-        door.append(entry.title)
 
     return render_template("index.html" , 
                           titles=titles, nhk=nhk, msn=msn, goo=goo, door=door )
